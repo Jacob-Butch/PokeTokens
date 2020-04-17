@@ -1,2 +1,2 @@
 # PokeTokens Plugin for Pixelmon
-Adds in pokemon modifying tokens that player's can redeem to modify their pokemon
+Adds in pokemon modifying tokens that players can redeem to modify their pokemon
