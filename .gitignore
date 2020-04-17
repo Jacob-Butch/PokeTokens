@@ -22,5 +22,6 @@ eclipse
 run
 
 # libs
-libs
-.jar
+libs/
+*.jar
+
