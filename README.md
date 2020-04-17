@@ -1,1 +1,1 @@
-# PokeTokens Plugin
+# PokeTokens Plugin for Pixelmon
