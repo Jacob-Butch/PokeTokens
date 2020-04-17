@@ -1,1 +1,1 @@
-# PokeTokens
+# PokeTokens Plugin
