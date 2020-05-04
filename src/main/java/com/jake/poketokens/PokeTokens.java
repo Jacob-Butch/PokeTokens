@@ -1,9 +1,6 @@
 package com.jake.poketokens;
 
-import com.jake.poketokens.command.claim.ClaimGender;
-import com.jake.poketokens.command.claim.ClaimHA;
-import com.jake.poketokens.command.claim.ClaimShiny;
-import com.jake.poketokens.command.claim.ClaimSize;
+import com.jake.poketokens.command.claim.*;
 import com.jake.poketokens.command.give.*;
 import com.jake.poketokens.util.CommandUtil;
 import org.slf4j.Logger;
@@ -59,6 +56,11 @@ public class PokeTokens {
                 .permission("poketokens.command.claim.size")
                 .executor(new ClaimSize())
                 .build(), "claimsizetoken");
+        Sponge.getCommandManager().register(this, CommandSpec.builder()
+                .arguments(CommandUtil.slotElement(), CommandUtil.ballElement())
+                .permission("poketokens.command.claim.ball")
+                .executor(new ClaimBall())
+                .build(), "claimballtoken");
 
         // Token Giving Commands
         Sponge.getCommandManager().register(this, CommandSpec.builder()
@@ -81,6 +83,11 @@ public class PokeTokens {
                 .permission("poketokens.command.give.size")
                 .executor(new GiveSize())
                 .build(), "givesizetoken");
+        Sponge.getCommandManager().register(this, CommandSpec.builder()
+                .arguments(CommandUtil.playerElement(), CommandUtil.amountElement())
+                .permission("poketokens.command.give.ball")
+                .executor(new GiveBall())
+                .build(), "giveballtoken");
 
         Sponge.getCommandManager().register(this, CommandSpec.builder()
                 .arguments(CommandUtil.playerElement())

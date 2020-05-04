@@ -1,6 +1,10 @@
 package com.jake.poketokens.util;
 
 import com.pixelmonmod.pixelmon.enums.EnumGrowth;
+import com.pixelmonmod.pixelmon.enums.items.EnumPokeballs;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class PixelmonUtil {
 
@@ -19,4 +23,19 @@ public class PixelmonUtil {
         }
     }
 
+    public static Map<String, EnumGrowth> getSizes(){
+        Map<String, EnumGrowth> sizes = new HashMap<>();
+        for(EnumGrowth size : EnumGrowth.values()){
+            sizes.put(size.name().toLowerCase(), size);
+        }
+        return sizes;
+    }
+
+    public static Map<String, EnumPokeballs> getBalls(){
+        Map<String, EnumPokeballs> balls = new HashMap<>();
+        for(EnumPokeballs ball : EnumPokeballs.values()){
+            balls.put(ball.getFilenamePrefix().replace("_", " ").split(" ")[0], ball);
+        }
+        return balls;
+    }
 }

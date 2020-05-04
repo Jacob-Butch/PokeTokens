@@ -57,13 +57,23 @@ public class Tokens {
         return token;
     }
 
+    public static ItemStack ballToken(int amount){
+        ItemStack token = getToken(amount);
+        Text name = deserialize("&e&lBall Change Token");
+        List<Text> lore = getList("&eChange a pokemon's caught ball by doing &5'&d/claimballtoken <slot> <ball>&5' &ewhile holding this");
+        token.offer(Keys.DISPLAY_NAME, name);
+        token.offer(Keys.ITEM_LORE, lore);
+        return token;
+    }
+
     public static ItemStack randomToken(){
-        int random = (new Random()).nextInt(4);
+        int random = (new Random()).nextInt(5);
         switch (random){
             case 0: return shinyToken(1);
             case 1: return sizeToken(1);
             case 2: return haToken(1);
             case 3: return genderToken(1);
+            case 4: return ballToken(1);
             default: return ItemStack.empty();
         }
     }

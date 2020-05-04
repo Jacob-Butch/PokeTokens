@@ -4,7 +4,7 @@ import com.jake.poketokens.PokeTokens;
 import com.jake.poketokens.helper.PokeHelper;
 import com.jake.poketokens.items.Tokens;
 import com.jake.poketokens.util.ItemUtil;
-import com.pixelmonmod.pixelmon.enums.EnumGrowth;
+import com.pixelmonmod.pixelmon.enums.items.EnumPokeballs;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
@@ -19,7 +19,7 @@ import javax.annotation.Nonnull;
 
 import static com.jake.poketokens.util.TextUtil.deserialize;
 
-public class ClaimSize implements CommandExecutor {
+public class ClaimBall implements CommandExecutor {
 
     @Nonnull
     public CommandResult execute(@Nonnull CommandSource src, @Nonnull CommandContext args) throws CommandException {
@@ -28,31 +28,30 @@ public class ClaimSize implements CommandExecutor {
         }
         Player player = (Player) src;
         ItemStack token = ItemUtil.getMainHand(player);
-        if(ItemStackUtil.compareIgnoreQuantity(token, Tokens.sizeToken(1))) {
+        if(ItemStackUtil.compareIgnoreQuantity(token, Tokens.ballToken(1))) {
             int slot = args.<Integer>getOne("slot").orElse(-1);
             if(slot < 1 || slot > 6){
                 throw new CommandException(Text.of("Invalid slot! Pick a slot between 1-6"));
             }
-            EnumGrowth size = args.<EnumGrowth>getOne("size").orElse(null);
-            if(size == null){
-                throw new CommandException(Text.of("Invalid size!"));
+            EnumPokeballs ball = args.<EnumPokeballs>getOne("ball").orElse(null);
+            if(ball == null){
+                throw new CommandException(Text.of("Invalid Ball Type!"));
             }
             PokeHelper helper = new PokeHelper(player, slot);
             if (!helper.pokemonInSlot()) {
                 throw new CommandException(Text.of("There is no pokemon in that slot!"));
             }
-            if (helper.sizeName().equalsIgnoreCase(size.name())) {
+            if (helper.isCaughtBall(ball)) {
                 throw new CommandException(Text.of(helper.species() + " is already that size!"));
             }
-            helper.setSize(size);
+            helper.setBall(ball);
             ItemUtil.takeOne(player, token);
-            player.sendMessage(deserialize("&2*&a&o" + helper.species() + " has been made " + helper.sizeName() + "&2*"));
-            PokeTokens.logger.info(player.getName() + " redeemed a Size Token on " + helper.species());
+            player.sendMessage(deserialize("&2*&a&o" + helper.species() + "'s caught ball has been changed to a " +
+                    ball.getFilenamePrefix().replace("_", " ") + "&2*"));
+            PokeTokens.logger.info(player.getName() + " redeemed a Ball Token on " + helper.species());
         } else {
-            throw new CommandException(Text.of("You must be holding a Size Token!"));
+            throw new CommandException(Text.of("You must be holding a Ball Token!"));
         }
         return CommandResult.success();
     }
-
-
 }

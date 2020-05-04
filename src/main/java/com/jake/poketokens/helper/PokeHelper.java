@@ -5,6 +5,7 @@ import com.pixelmonmod.pixelmon.Pixelmon;
 import com.pixelmonmod.pixelmon.api.pokemon.Pokemon;
 import com.pixelmonmod.pixelmon.entities.pixelmon.stats.Gender;
 import com.pixelmonmod.pixelmon.enums.EnumGrowth;
+import com.pixelmonmod.pixelmon.enums.items.EnumPokeballs;
 import org.spongepowered.api.entity.living.player.Player;
 
 @SuppressWarnings("all")
@@ -49,4 +50,8 @@ public class PokeHelper {
             pokemon.setGender(pokemon.getGender() == Gender.Male ? Gender.Female : Gender.Male);
         }
     }
+
+    public void setBall(EnumPokeballs ball){ pokemon.setCaughtBall(ball); }
+
+    public boolean isCaughtBall(EnumPokeballs ball){ return pokemon.getCaughtBall() == ball; }
 }

@@ -1,7 +1,6 @@
 package com.jake.poketokens.util;
 
 import com.google.common.base.Functions;
-import com.jake.poketokens.command.elements.SizeCommandElement;
 import org.spongepowered.api.command.args.CommandArgs;
 import org.spongepowered.api.command.args.CommandElement;
 import org.spongepowered.api.command.args.GenericArguments;
@@ -39,9 +38,15 @@ public class CommandUtil {
 
     public static CommandElement playerElement(){ return GenericArguments.player(Text.of("player")); }
 
-    public static CommandElement slotElement(){ return GenericArguments.integer(Text.of("slot")); }
+    public static CommandElement sizeElement(){
+        return GenericArguments.choices(Text.of("size"), PixelmonUtil.getSizes());
+    }
 
-    public static CommandElement sizeElement(){ return new SizeCommandElement(Text.of("size")); }
+    public static CommandElement ballElement(){
+        return GenericArguments.choices(Text.of("ball"), PixelmonUtil.getBalls());
+    }
+
+    public static CommandElement slotElement(){ return GenericArguments.integer(Text.of("slot")); }
 
     public static CommandElement amountElement(){
         return GenericArguments.optional(GenericArguments.integer(Text.of("amount")));
